@@ -1,0 +1,78 @@
+// 暗黑模式下文字颜色
+@mixin fontDarkModeColor($alpha) {
+  color: rgba(255, 255, 255, $alpha) !important;
+}
+
+@mixin backgroundDarkModeColor($alpha) {
+  background: rgba(18, 18, 18, $alpha) !important;
+}
+
+html.dark {
+  .el-header, .el-aside, .el-main {
+    background: rgba(18, 18, 18, 1) !important;
+  }
+
+  /*
+  左侧 NavAside 侧边栏
+   */
+  .aside_nav_title {
+    @include fontDarkModeColor(.5);
+
+    &:hover {
+      @include fontDarkModeColor(.95);
+    }
+  }
+
+  /*
+  LocationWeather 导航天气显示
+  */
+  .weather_div {
+    @include fontDarkModeColor(.75);
+  }
+
+  .weather_city {
+    @include fontDarkModeColor(.5);
+  }
+
+  /*
+  导航显示 NavMainHeader 顶部栏
+   */
+  .text_btn {
+    a:link, a:visited {
+      @include fontDarkModeColor(.5);
+    }
+
+    a:hover {
+      @include fontDarkModeColor(1);
+    }
+  }
+
+  /*
+  导航显示 NavMain 显示区
+   */
+  .classify_title {
+    @include fontDarkModeColor(.75);
+  }
+
+  .card_info {
+    &:hover {
+      background: rgba(255, 255, 255, .015);
+      border: 2px solid rgb(255, 255, 255, .03);
+      padding: 8px;
+
+      .card_info_title {
+        @include fontDarkModeColor(.95);
+        text-decoration-color: rgba(255, 255, 255, .75);
+      }
+    }
+  }
+
+  .card_info_title {
+    @include fontDarkModeColor(.5);
+    text-decoration-color: rgba(255, 255, 255, .15);
+  }
+
+  .card_info_subtitle {
+    @include fontDarkModeColor(.5);
+  }
+}
