@@ -3,24 +3,12 @@ import NavAside from "../components/NavAside.vue";
 import NavHeader from "../components/NavHeader.vue";
 import NavMain from "../components/NavMain.vue";
 import "element-plus/theme-chalk/display.css";
-import Search from "../components/Search.vue";
-import { ref } from "vue";
-import emitter from "../untils/bus";
 
 // 左侧侧边栏 Aside 宽度
 const navAsideWidth = 225;
 
 // 顶栏 Header 高度
 const navHeaderHeight = 60;
-
-// 显示导航页面或搜索页面
-const showNavigation = ref(true);
-
-// 通过 emitter 接收 NavHeader 的数据
-emitter.on("changePage", (response) => {
-  // console.log(response);
-  showNavigation.value = response;
-});
 </script>
 
 <template>
@@ -29,10 +17,7 @@ emitter.on("changePage", (response) => {
       <el-header :height="navHeaderHeight + 'px'">
         <NavHeader />
       </el-header>
-      <el-container v-show="!showNavigation">
-        <Search />
-      </el-container>
-      <el-container class="home_container" v-show="showNavigation">
+      <el-container class="home_container">
         <el-aside :width="navAsideWidth + 'px'" class="aside hidden-xs-only">
           <NavAside />
         </el-aside>

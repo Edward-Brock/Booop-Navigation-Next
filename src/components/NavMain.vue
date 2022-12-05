@@ -113,6 +113,7 @@ function refreshto(cardInfo) {
   z-index: 1;
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(255, 255, 255, .25);
 }
 
 .card_group {

@@ -2,7 +2,7 @@
 import logo_pic_light from "../assets/logo_396_118_black.png";
 import logo_pic_dark from "../assets/logo_396_118_white.png";
 import { useDark, useToggle } from "@vueuse/core";
-import { Sunny, Moon, Search, House } from "@element-plus/icons-vue";
+import { Sunny, Moon } from "@element-plus/icons-vue";
 import { onMounted, reactive, ref, watch } from "vue";
 import emitter from "../untils/bus";
 import LocationWeather from "./LocationWeather.vue";
@@ -35,14 +35,6 @@ onMounted(() => {
     logoImageSrc.value = logoChangeImages[0];
   }
 });
-
-const showHome = ref(true);
-
-function changePage(event) {
-  showHome.value = event;
-  // 将数据通过 emitter 传递出去
-  emitter.emit("changePage", event);
-}
 </script>
 
 <template>
@@ -55,16 +47,6 @@ function changePage(event) {
         <LocationWeather class="hidden-xs-only" />
       </div>
       <div class="tool_setting">
-        <div class="text_btn" :class="showHome===true?'active':''" style="cursor: pointer;">
-          <el-icon @click="changePage(true)">
-            <House />
-          </el-icon>
-        </div>
-        <div class="text_btn" :class="showHome!==true?'active':''" style="cursor: pointer;">
-          <el-icon @click="changePage(false)">
-            <Search />
-          </el-icon>
-        </div>
         <div class="text_btn">
           <router-link to="/login">后台</router-link>
         </div>

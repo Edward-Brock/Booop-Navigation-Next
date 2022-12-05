@@ -52,6 +52,7 @@ html.dark {
    */
   .classify_title {
     @include fontDarkModeColor(.75);
+    @include backgroundDarkModeColor(.25);
   }
 
   .card_info {
