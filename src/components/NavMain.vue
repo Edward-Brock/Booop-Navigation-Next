@@ -8,11 +8,25 @@ onMounted(() => {
     method: "GET",
     url: import.meta.env.VITE_APP_BASE_API + "/getNavigationInfoR18"
   }).then((response) => {
-      // console.log(response.data.result);
+      // console.log(response);
       website_info.navigationInfoArray = arrayGroupBy(response.data.result, "classify_id");
       website_info.classifyArray = unique(response.data.result, "classify_id");
       // 将数据通过 emitter 传递出去
       emitter.emit("partitionInfo", website_info.classifyArray);
+
+      axios({
+        method: "POST",
+        url: import.meta.env.VITE_APP_BASE_API + "/addLog",
+        data: {
+          method: response.config.method,
+          url: response.config.url,
+          ip: response.data.ipInfo,
+          create_time: new Date().getTime()
+        }
+      }).then((response) => {
+          // console.log(response);
+        }
+      );
     }
   );
 });
@@ -65,7 +79,7 @@ const arrayGroupBy = (list, groupId) => {
  */
 function refreshto(cardInfo) {
   // console.log(cardInfo);
-  window.open(cardInfo.website_url, "_blank");
+  window.open(cardInfo.website_url, "");
 
   // 统计跳转网站访问次数
   axios({

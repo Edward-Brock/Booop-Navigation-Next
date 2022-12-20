@@ -30,4 +30,7 @@ router.post("/deleteNavigation", navigationRouter.deleteNavigation);
 // 统计每个网站访问次数
 router.post("/visitCount", navigationRouter.visitCount);
 
+// 访问网站写入日志
+router.post("/addLog", navigationRouter.addLog);
+
 module.exports = router;

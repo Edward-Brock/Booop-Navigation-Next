@@ -27,6 +27,7 @@ exports.getNavigationInfoR18 = (req, res) => {
     // console.log(result);
     res.send({
       status: 0,
+      ipInfo: req.headers["x-real-ip"] || req.connection.remoteAddress,
       result
     });
   });
@@ -198,4 +199,29 @@ exports.visitCount = (req, res) => {
     }
     return res.send({ status: 0, message: "添加成功" });
   });
+};
+
+// 访问网站写入日志
+exports.addLog = (req, res) => {
+  let log_add_info = req.body;
+  console.log(log_add_info);
+
+  const log_template = {
+    method: log_add_info.method,
+    url: log_add_info.url,
+    ip: log_add_info.ip,
+    create_time: log_add_info.create_time
+  };
+
+  const insert_card_item = "INSERT INTO `log` SET ?";
+  db.query(insert_card_item, log_template, (err, result) => {
+    if (err) {
+      return res.cc(err);
+    }
+    if (result.affectedRows !== 1) {
+      return res.cc("日志记录失败");
+    }
+    return res.send({ status: 0, message: "日志记录成功", data: log_template });
+  });
+
 };
