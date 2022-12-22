@@ -8,27 +8,24 @@ onMounted(() => {
     method: "GET",
     url: import.meta.env.VITE_APP_BASE_API + "/getNavigationInfoR18"
   }).then((response) => {
-      // console.log(response);
-      website_info.navigationInfoArray = arrayGroupBy(response.data.result, "classify_id");
-      website_info.classifyArray = unique(response.data.result, "classify_id");
-      // 将数据通过 emitter 传递出去
-      emitter.emit("partitionInfo", website_info.classifyArray);
+    // console.log(response);
+    website_info.navigationInfoArray = arrayGroupBy(response.data.result, "classify_id");
+    website_info.classifyArray = unique(response.data.result, "classify_id");
+    // 将数据通过 emitter 传递出去
+    emitter.emit("partitionInfo", website_info.classifyArray);
 
-      axios({
-        method: "POST",
-        url: import.meta.env.VITE_APP_BASE_API + "/addLog",
-        data: {
-          method: response.config.method,
-          url: response.config.url,
-          ip: response.data.ipInfo,
-          create_time: new Date().getTime()
-        }
-      }).then((response) => {
-          // console.log(response);
-        }
-      );
-    }
-  );
+    // 记录接口调用日志
+    axios({
+      method: "POST",
+      url: import.meta.env.VITE_APP_BASE_API + "/addLog",
+      data: {
+        method: response.config.method,
+        url: response.config.url,
+        ip: response.data.ipInfo,
+        create_time: new Date().getTime()
+      }
+    })
+  });
 });
 
 const website_info = reactive({
@@ -89,11 +86,7 @@ function refreshto(cardInfo) {
       id: cardInfo.id,
       website_visit_num: cardInfo.website_visit_num + 1
     }
-  }).then((response) => {
-      // console.log(response);
-    }
-  );
-
+  })
 }
 </script>
 

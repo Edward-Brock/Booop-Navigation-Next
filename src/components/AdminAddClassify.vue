@@ -58,6 +58,18 @@ const submitForm = async (formEl) => {
               type: "warning"
             });
           }
+
+          // 记录接口调用日志
+          axios({
+            method: "POST",
+            url: import.meta.env.VITE_APP_BASE_API + "/addLog",
+            data: {
+              method: response.config.method,
+              url: response.config.url,
+              ip: response.data.ipInfo,
+              create_time: new Date().getTime()
+            }
+          });
         }
       );
     } else {

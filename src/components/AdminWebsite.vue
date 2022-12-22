@@ -128,20 +128,31 @@ function deleteNavigation(id) {
       id
     }
   }).then((response) => {
-      // console.log(response.data);
-      if (!response.data.status) {
-        ElMessage({
-          message: response.data.message,
-          type: "success"
-        });
-      } else {
-        ElMessage({
-          message: response.data.message,
-          type: "warning"
-        });
-      }
+    // console.log(response.data);
+    if (!response.data.status) {
+      ElMessage({
+        message: response.data.message,
+        type: "success"
+      });
+    } else {
+      ElMessage({
+        message: response.data.message,
+        type: "warning"
+      });
     }
-  );
+
+    // 记录接口调用日志
+    axios({
+      method: "POST",
+      url: import.meta.env.VITE_APP_BASE_API + "/addLog",
+      data: {
+        method: response.config.method,
+        url: response.config.url,
+        ip: response.data.ipInfo,
+        create_time: new Date().getTime()
+      }
+    });
+  });
 }
 </script>
 

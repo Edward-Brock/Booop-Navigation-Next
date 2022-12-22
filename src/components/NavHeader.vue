@@ -6,6 +6,7 @@ import { Sunny, Moon } from "@element-plus/icons-vue";
 import { onMounted, reactive, ref, watch } from "vue";
 import emitter from "../untils/bus";
 import LocationWeather from "./LocationWeather.vue";
+import router from "../router";
 
 // 暗黑模式
 const isDark = useDark();
@@ -35,11 +36,15 @@ onMounted(() => {
     logoImageSrc.value = logoChangeImages[0];
   }
 });
+
+function jumpHome() {
+  router.push("/");
+}
 </script>
 
 <template>
   <div class="container">
-    <div class="logo">
+    <div class="logo" @click="jumpHome">
       <img :src="logoImageSrc" alt="booop navigation logo" />
     </div>
     <div class="tool_group">
@@ -79,6 +84,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   @media screen and (max-width: 768px) {
     margin: 0 auto;

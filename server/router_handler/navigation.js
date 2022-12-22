@@ -12,6 +12,7 @@ exports.getNavigationInfo = (req, res) => {
     // console.log(result);
     res.send({
       status: 0,
+      ipInfo: req.headers["x-real-ip"] || req.connection.remoteAddress,
       result
     });
   });
@@ -43,6 +44,7 @@ exports.getClassifyInfo = (req, res) => {
     // console.log(result);
     res.send({
       status: 0,
+      ipInfo: req.headers["x-real-ip"] || req.connection.remoteAddress,
       result
     });
   });
@@ -66,6 +68,7 @@ exports.getPassword = (req, res) => {
     console.log("保护锁验证结果为：", verify_status);
     res.send({
       status: 0,
+      ipInfo: req.headers["x-real-ip"] || req.connection.remoteAddress,
       verify_status
     });
   });
@@ -156,6 +159,7 @@ exports.updateDatabaseInfo = (req, res) => {
     }
     return res.send({
       status: 0,
+      ipInfo: req.headers["x-real-ip"] || req.connection.remoteAddress,
       message: "相关内容更新成功"
     });
   });
@@ -178,6 +182,7 @@ exports.deleteNavigation = (req, res) => {
     }
     return res.send({
       status: 0,
+      ipInfo: req.headers["x-real-ip"] || req.connection.remoteAddress,
       message: "相关内容删除成功"
     });
   });
